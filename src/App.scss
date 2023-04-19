@@ -1,0 +1,18 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 100px [col-start]);
+    grid-template-rows: repeat(4, 30px [row-start]);
+    width: fit-content;
+    border: 2px solid black;
+}
+
+.button {
+    height: 30px;
+    width: 100px;
+
+    &__selected {
+        background-color: red;
+        position: relative;
+        top: 124px;
+    }
+}
