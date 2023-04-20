@@ -1,7 +1,7 @@
 {
-  "name": "dnd-input",
-  "version": "0.5.0",
-  "description": "Build a custom input dashbord",
+  "name": "dnd-gradient-background",
+  "version": "0.7.0",
+  "description": "Build a gradient backgound from random colors",
   "main": "index.js",
   "license": "MIT",
   "private": false,
