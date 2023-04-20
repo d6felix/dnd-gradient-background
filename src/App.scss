@@ -8,6 +8,7 @@
 }
 
 .container {
+    background-color: #EFEFEF;
     margin: 30px;
     display: grid;
     grid-template-columns: repeat(3, 100px [col-start]);
@@ -17,7 +18,16 @@
     border: 2px solid black;
 }
 
-.button {
+.color-label {
+    text-align: center;
+    color: #EFEFEF;
+    font-family: 'Eudoxus Sans';
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 700;
+    font-style: normal;
+    -webkit-text-stroke: 0.5px #202020;
+    -moz-text-stroke: 0.5px #202020;
     height: 30px;
     width: 100px;
 }
