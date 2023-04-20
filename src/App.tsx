@@ -8,46 +8,55 @@ import DragElement from "./components/DragElement/DragElement";
 import DropArea from "./components/DropArea/DropArea";
 
 export const ItemTypes = {
-    BUTTON: 'button'
+    STORE: "STORE",
+    CALC: "CALC",
 }
-
 type CalcButton = {
     button: ReactNode;
+}
+
+export type Selected = {
     isSelected: boolean;
+    position: number;
 }
 
 export const App = () => {
     let buttons: CalcButton[] = Array.from(Array(12));
-    let storeZone = Array(12).fill(0);
-    let calcZone = Array(12).fill(0);
-    const [isSelected, setIsSelected] = useState<boolean[]>(Array(12).fill(false));
-    const [lastSelected, setLastSelected] = useState<number>(0);
+    let storeZone = Array.from(Array(12));
+    let calcZone = Array.from(Array(12));
+    const [selected, setSelected] = useState<Selected[]>(Array.from(Array(12)).map(
+        (_, index) => { return { isSelected: false, position: index }; }
+    ));
 
     buttons = buttons.map((_, index) => {
         const button =
-            (<DragElement type={ItemTypes.BUTTON} key={index}>
+            (<DragElement index={index} type={selected[index].isSelected ? ItemTypes.CALC : ItemTypes.STORE} key={index} >
                 <button
-                    className={classNames("button", isSelected[index] && "button__selected")}
-                    onClick={() => {
-                        setIsSelected([...isSelected.slice(0, index), !isSelected[index], ...isSelected.slice(index + 1)]);
-                    }}
-                >My number: {index}</button >
+                    className={classNames("button", selected[index].isSelected && "button__selected")}
+                    onClick={() => { }}
+                >
+                    My number: {index}
+                </button >
             </DragElement>);
-        return ({ button, isSelected: isSelected[index] });
+        return ({ button });
     });
 
     storeZone = storeZone.map((_, index) => {
+        const itemIndex = selected.findIndex((value) => value.position === index && value.isSelected === false);
+
         return (
-            <DropArea type={ItemTypes.BUTTON} key={index}>
-                {!buttons[index].isSelected && buttons[index].button}
+            <DropArea type={ItemTypes.STORE} key={index} indexDropArea={index} selected={selected} setSelected={setSelected}>
+                {itemIndex !== -1 && !selected[itemIndex].isSelected && buttons[itemIndex].button}
             </DropArea>
         );
     });
 
     calcZone = calcZone.map((_, index) => {
+        const itemIndex = selected.findIndex((value) => value.position === index && value.isSelected === true);
+
         return (
-            <DropArea type={ItemTypes.BUTTON} key={index}>
-                {buttons[index].isSelected && buttons[index].button}
+            <DropArea type={ItemTypes.CALC} key={index} indexDropArea={index} selected={selected} setSelected={setSelected}>
+                {itemIndex !== -1 && selected[itemIndex].isSelected && buttons[itemIndex].button}
             </DropArea>
         );
     });
