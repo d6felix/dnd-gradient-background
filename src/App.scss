@@ -11,11 +11,18 @@
     background-color: #EFEFEF;
     margin: 30px;
     display: grid;
-    grid-template-columns: repeat(3, 100px [col-start]);
-    grid-template-rows: repeat(4, 30px [row-start]);
     width: fit-content;
     height: fit-content;
+    grid-template-columns: repeat(3, 100px [col-start]);
     border: 2px solid black;
+
+    &_small {
+        grid-template-rows: repeat(2, 30px [row-start]);
+    }
+
+    &_big {
+        grid-template-rows: repeat(8, 30px [row-start]);
+    }
 }
 
 .color-label {
