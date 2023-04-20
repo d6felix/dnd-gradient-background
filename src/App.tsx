@@ -1,11 +1,12 @@
-import React, { ReactNode, useEffect, useState } from "react";
-import Button from "./components/Button/Button";
+import React, { ReactNode, useState } from "react";
 import classNames from "classnames";
 
 import "./App.scss";
-import { useDrag, useDrop } from "react-dnd";
 import DragElement from "./components/DragElement/DragElement";
 import DropArea from "./components/DropArea/DropArea";
+import Button from "./components/Button/Button";
+import { ColorsTable } from "./data/colors";
+import { useGradientColor } from "./utils/useGradientColor";
 
 const STORE_SIZE: number = 24;
 const CALC_SIZE: number = 12;
@@ -36,16 +37,18 @@ export const App = () => {
         const button =
             (<DragElement
                 index={index}
-                type={selected[index].isSelected ? ItemTypes.CALC : ItemTypes.STORE} key={index}
+                type={selected[index].isSelected ? ItemTypes.CALC : ItemTypes.STORE}
+                key={index}
             >
-                <button
+                <Button
                     className={classNames("button", selected[index].isSelected && "button__selected")}
                     onClick={() => setInputValue(inputValue + index)}
                     disabled={!selected[index].isSelected}
+                    style={{ backgroundColor: ColorsTable[index] }}
                 >
                     My number: {index}
-                </button >
-            </DragElement>);
+                </Button >
+            </DragElement >);
         return ({ button });
     });
 
@@ -69,6 +72,8 @@ export const App = () => {
         );
     });
 
+
+    document.getElementsByTagName("body")[0].style.background = useGradientColor(selected);
     return (
         <div className={classNames("wrapper")} >
             <div className={classNames("container")}>
@@ -78,7 +83,6 @@ export const App = () => {
             <div className={classNames("container")}>
                 {calcZone}
             </div >
-            <input type="text" value={inputValue}></input>
         </div >
     );
 }

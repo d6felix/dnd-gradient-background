@@ -2,7 +2,6 @@ import classNames from "classnames";
 import React from "react";
 
 export type ButtonProps = React.PropsWithChildren<{
-    loading?: boolean;
     children: React.ReactNode;
     disabled?: boolean;
     classname?: string;
@@ -11,7 +10,6 @@ export type ButtonProps = React.PropsWithChildren<{
 
 export const Button: React.FC<ButtonProps> = ({
     children,
-    loading = false,
     className = "",
     disabled = false,
     ...props
@@ -19,11 +17,12 @@ export const Button: React.FC<ButtonProps> = ({
     return (
         <button
             {...props}
-            disabled={loading || disabled}
+            disabled={disabled}
             className={classNames(
                 className,
             )}
         >
+            {children}
         </button>
     );
 };
