@@ -5,7 +5,7 @@ import "./App.scss";
 import DragElement from "./components/DragElement/DragElement";
 import DropArea from "./components/DropArea/DropArea";
 import Button from "./components/Button/Button";
-import { generateColorsTable } from "./data/colors";
+import { generateColorsTable } from "./utils/generateColorsTable";
 import { useGradientColor } from "./utils/useGradientColor";
 
 const STORE_SIZE: number = 24;
