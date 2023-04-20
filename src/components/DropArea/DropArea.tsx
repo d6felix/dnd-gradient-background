@@ -14,23 +14,31 @@ export const DropArea: React.FC<DropAreaProps> = ({ children, type, indexDropAre
     const [collectedProps, drop] = useDrop({
         accept: [ItemTypes.CALC, ItemTypes.STORE],
         drop: (item: DragType, monitor) => {
-            if (item.type !== type) {
-                setSelected([...selected.slice(0, item.index),
-                { isSelected: !selected[item.index].isSelected, position: indexDropArea },
-                ...selected.slice(item.index + 1)]);
-            } else {
-                setSelected([...selected.slice(0, item.index),
-                { isSelected: selected[item.index].isSelected, position: indexDropArea },
-                ...selected.slice(item.index + 1)]);
-            }
-        },
-        canDrop: (item, monitor) => {
             const itemIsSelected = selected[item.index].isSelected;
             const positionOccupied = selected.findIndex(value =>
-                item.type !== type &&
-                value.position === indexDropArea &&
-                !value.isSelected === itemIsSelected) !== -1;
-            return positionOccupied === false;
+                (
+                    item.type !== type &&
+                    value.position === indexDropArea &&
+                    !value.isSelected === itemIsSelected
+                ) || (
+                    item.type === type &&
+                    value.position === indexDropArea &&
+                    value.isSelected === itemIsSelected
+                ));
+            if (positionOccupied === -1) {
+                setSelected([...selected.slice(0, item.index),
+                { isSelected: (item.type !== type) != selected[item.index].isSelected, position: indexDropArea },
+                ...selected.slice(item.index + 1)]);
+            }
+            else {
+                const dragItem = { isSelected: selected[item.index].isSelected, position: selected[item.index].position };
+                const dropItem = { isSelected: selected[positionOccupied].isSelected, position: selected[positionOccupied].position };
+                const selectedWithSwap = [...selected];
+                selectedWithSwap[positionOccupied] = dragItem;
+                selectedWithSwap[item.index] = dropItem;
+                setSelected(selectedWithSwap);
+                console.log(selected, positionOccupied, item.index, dragItem, dropItem);
+            }
         },
         collect: (monitor) => ({
             isOver: !!monitor.isOver()
