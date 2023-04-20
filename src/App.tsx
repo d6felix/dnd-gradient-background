@@ -5,18 +5,18 @@ import "./App.scss";
 import DragElement from "./components/DragElement/DragElement";
 import DropArea from "./components/DropArea/DropArea";
 import Button from "./components/Button/Button";
-import { ColorsTable } from "./data/colors";
+import { generateColorsTable } from "./data/colors";
 import { useGradientColor } from "./utils/useGradientColor";
 
 const STORE_SIZE: number = 24;
-const CALC_SIZE: number = 12;
+const CALC_SIZE: number = 6;
 
 export const ItemTypes = {
     STORE: "STORE",
     CALC: "CALC",
 }
-type CalcButton = {
-    button: ReactNode;
+type ColorLabel = {
+    label: ReactNode;
 }
 
 export type Selected = {
@@ -25,31 +25,30 @@ export type Selected = {
 }
 
 export const App = () => {
-    let buttons: CalcButton[] = Array.from(Array(STORE_SIZE));
+    let labels: ColorLabel[] = Array.from(Array(STORE_SIZE));
     let storeZone = Array.from(Array(STORE_SIZE));
     let calcZone = Array.from(Array(CALC_SIZE));
     const [selected, setSelected] = useState<Selected[]>(Array.from(Array(STORE_SIZE)).map(
         (_, index) => { return { isSelected: false, position: index }; }
     ));
+    const [colorsTable, setColorsTable] = useState<string[]>(generateColorsTable());
     const [inputValue, setInputValue] = useState<string>("");
 
-    buttons = buttons.map((_, index) => {
-        const button =
+    labels = labels.map((_, index) => {
+        const label =
             (<DragElement
                 index={index}
                 type={selected[index].isSelected ? ItemTypes.CALC : ItemTypes.STORE}
                 key={index}
             >
-                <Button
-                    className={classNames("button", selected[index].isSelected && "button__selected")}
-                    onClick={() => setInputValue(inputValue + index)}
-                    disabled={!selected[index].isSelected}
-                    style={{ backgroundColor: ColorsTable[index] }}
+                <div
+                    className={classNames("color-label")}
+                    style={{ backgroundColor: colorsTable[index] }}
                 >
-                    My number: {index}
-                </Button >
+                    {colorsTable[index]}
+                </div >
             </DragElement >);
-        return ({ button });
+        return ({ label });
     });
 
     storeZone = storeZone.map((_, index) => {
@@ -57,7 +56,7 @@ export const App = () => {
 
         return (
             <DropArea type={ItemTypes.STORE} key={index} indexDropArea={index} selected={selected} setSelected={setSelected}>
-                {itemIndex !== -1 && !selected[itemIndex].isSelected && buttons[itemIndex].button}
+                {itemIndex !== -1 && !selected[itemIndex].isSelected && labels[itemIndex].label}
             </DropArea>
         );
     });
@@ -67,23 +66,25 @@ export const App = () => {
 
         return (
             <DropArea type={ItemTypes.CALC} key={index} indexDropArea={index} selected={selected} setSelected={setSelected}>
-                {itemIndex !== -1 && selected[itemIndex].isSelected && buttons[itemIndex].button}
+                {itemIndex !== -1 && selected[itemIndex].isSelected && labels[itemIndex].label}
             </DropArea>
         );
     });
 
 
-    document.getElementsByTagName("body")[0].style.background = useGradientColor(selected);
+    document.getElementsByTagName("body")[0].style.background = useGradientColor(selected, colorsTable);
     return (
-        <div className={classNames("wrapper")} >
-            <div className={classNames("container")}>
-                {storeZone}
-            </div>
-
-            <div className={classNames("container")}>
-                {calcZone}
+        <>
+            <div className={classNames("wrapper")} >
+                <div className={classNames("container")}>
+                    {storeZone}
+                </div>
+                <div className={classNames("container")}>
+                    {calcZone}
+                </div >
             </div >
-        </div >
+            <Button onClick={() => { setColorsTable(generateColorsTable()) }}>Generate new colors</Button>
+        </>
     );
 }
 
