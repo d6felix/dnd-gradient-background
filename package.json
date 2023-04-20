@@ -1,7 +1,7 @@
 {
-  "name": "dnd-calculator",
-  "version": "0.0.1",
-  "description": "idle game",
+  "name": "dnd-input",
+  "version": "0.5.0",
+  "description": "Build a custom input dashbord",
   "main": "index.js",
   "license": "MIT",
   "private": false,
