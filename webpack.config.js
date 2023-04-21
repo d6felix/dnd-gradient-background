@@ -46,12 +46,11 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(contentPath, "index.html"), // путь до нашего шаблона
+      template: path.resolve(contentPath, "index.html"),
       favicon: path.resolve(contentPath, "favicon.ico"),
     }),
     !isProd && new ReactRefreshWebpackPlugin(),
     new MiniCssExtractPlugin({
-      // Для того чтобы файл со стилями не кэшировался в браузере добавим filename
       filename: "[name]-[fullhash].css",
     }),
     new TsCheckerPlugin(),
@@ -87,7 +86,6 @@ module.exports = {
     ],
   },
   resolve: {
-    // теперь при импорте эти расширения файлов можно не указывать
     extensions: [".tsx", ".jsx", ".js", ".ts"],
     alias: {
       "@components": path.join(srcPath, "/components"),
@@ -96,9 +94,9 @@ module.exports = {
     },
   },
   devServer: {
-    host: loclahost, // хост нашего сервера
-    port: 3000, // порт по которому к нему можно обращаться
-    static: contentPath, // указывает по какому пути лежит index.html
+    host: loclahost,
+    port: 3000,
+    static: contentPath,
     hot: true,
     historyApiFallback: true,
   },
