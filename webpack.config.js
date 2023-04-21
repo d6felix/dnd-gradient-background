@@ -90,14 +90,9 @@ module.exports = {
     // теперь при импорте эти расширения файлов можно не указывать
     extensions: [".tsx", ".jsx", ".js", ".ts"],
     alias: {
-      components: path.join(srcPath, "@components"),
-      config: path.join(srcPath, "@config"),
-      styles: path.join(srcPath, "@styles"),
-      utils: path.join(srcPath, "@utils"),
-      store: path.join(srcPath, "@store"),
-      hook: path.join(srcPath, "@hook"),
-      App: path.join(srcPath, "@App"),
-      pages: path.join(srcPath, "@pages"),
+      "@components": path.join(srcPath, "/components"),
+      "@utils": path.join(srcPath, "/utils"),
+      "@App": path.join(srcPath, "/App"),
     },
   },
   devServer: {

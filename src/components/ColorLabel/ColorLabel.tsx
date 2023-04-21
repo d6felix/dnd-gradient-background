@@ -1,6 +1,6 @@
 import React from "react";
-import DragElement from "../DragElement";
-import { ItemTypes, Selected } from "../../../src/App";
+import DragElement from "@components/DragElement";
+import { ItemTypes, Selected } from "@App";
 import classNames from "classnames";
 
 

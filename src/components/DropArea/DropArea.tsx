@@ -1,7 +1,7 @@
 import React from "react";
 import { useDrop } from "react-dnd";
-import { DragType } from "../DragElement/DragElement";
-import { ItemTypes, Selected } from "../../../src/App";
+import { DragType } from "@components/DragElement/DragElement";
+import { ItemTypes, Selected } from "@App";
 import classNames from "classnames";
 
 type DropAreaProps = React.PropsWithChildren<{

@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React from "react";
-import { ColorLabel, ItemTypes, Selected } from "../../../src/App";
-import DropArea from "../DropArea";
+import { ColorLabel, ItemTypes, Selected } from "@App";
+import DropArea from "@components/DropArea";
 
 type DropContainerProps = {
     size: number;

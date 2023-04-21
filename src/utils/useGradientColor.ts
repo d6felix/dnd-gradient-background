@@ -1,4 +1,4 @@
-import { Selected } from "src/App";
+import { Selected } from "@App";
 import { useMemo } from "react";
 
 export const useGradientColor = (selected: Selected[], colorsTable: string[]): string => useMemo(() => {

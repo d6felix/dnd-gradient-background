@@ -2,13 +2,11 @@ import React, { ReactNode, useState } from "react";
 import classNames from "classnames";
 
 import "./App.scss";
-import DragElement from "./components/DragElement/DragElement";
-import DropArea from "./components/DropArea/DropArea";
-import Button from "./components/Button/Button";
-import { generateColorsTable } from "./utils/generateColorsTable";
-import { useGradientColor } from "./utils/useGradientColor";
-import ColorLabel from "./components/ColorLabel";
-import DropContainer from "./components/DropContainer/DropContainer";
+import Button from "@components/Button/Button";
+import { generateColorsTable } from "@utils/generateColorsTable";
+import { useGradientColor } from "@utils/useGradientColor";
+import ColorLabel from "@components/ColorLabel";
+import DropContainer from "@components/DropContainer/DropContainer";
 
 const STORE_SIZE: number = 24;
 const CALC_SIZE: number = 6;
