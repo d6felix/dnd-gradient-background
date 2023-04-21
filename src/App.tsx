@@ -19,17 +19,17 @@ export const ItemTypes = {
 }
 export type ColorLabel = ReactNode;
 
+
 export type Selected = {
     isSelected: boolean;
     position: number;
 }
 
 export const App = () => {
+    const [colorsTable, setColorsTable] = useState<string[]>(generateColorsTable());
     const [selected, setSelected] = useState<Selected[]>(Array.from(Array(STORE_SIZE)).map(
         (_, index) => { return { isSelected: index < 2 ? true : false, position: index }; }
     ));
-    const [colorsTable, setColorsTable] = useState<string[]>(generateColorsTable());
-
     const labels: ColorLabel[] = Array.from(Array(STORE_SIZE)).map((_, index) =>
         <ColorLabel index={index} selected={selected[index]} color={colorsTable[index]} />
     );
@@ -37,11 +37,16 @@ export const App = () => {
     document.getElementsByTagName("body")[0].style.background = useGradientColor(selected, colorsTable);
     return (
         <>
-            <div className={classNames("wrapper")} >
+            <div className={classNames("flex-wrapper")}>
+                <h1 className={classNames("header")}>Try to drag and drop color lables beetwen boxes.</h1>
+            </div>
+            <div className={classNames("flex-wrapper", "flex-wrapper_drop")}>
                 <DropContainer type={ItemTypes.STORE} selected={selected} setSelected={setSelected} size={STORE_SIZE} labels={labels} />
                 <DropContainer type={ItemTypes.CALC} selected={selected} setSelected={setSelected} size={CALC_SIZE} labels={labels} />
-            </div >
-            <Button onClick={() => { setColorsTable(generateColorsTable()) }}>Generate new colors</Button>
+            </div>
+            <div className={classNames("flex-wrapper")}>
+                <Button className={classNames("button")} onClick={() => { setColorsTable(generateColorsTable()) }}>Generate new colors</Button>
+            </div>
         </>
     );
 }

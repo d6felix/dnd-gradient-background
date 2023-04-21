@@ -11,7 +11,7 @@ type DropContainerProps = {
     type: string;
 }
 
-export const DropContainer: React.FC<DropContainerProps> = ({ size, selected, setSelected, labels, type }) => {
+export const DropContainer: React.FC<DropContainerProps> = ({ size, type, selected, labels, setSelected }) => {
     const allowSelected = type === ItemTypes.CALC ? true : false;
     const dropZones = Array.from(Array(size)).map((_, index) => {
         const itemIndex = selected.findIndex((value) => value.position === index && value.isSelected === allowSelected);
@@ -23,7 +23,7 @@ export const DropContainer: React.FC<DropContainerProps> = ({ size, selected, se
         );
     });
 
-    return <div className={classNames("container", allowSelected ? "container_small" : "container_big")}>
+    return <div className={classNames("drop__container", allowSelected ? "drop__container_small" : "drop__container_big")}>
         {dropZones}
     </div>;
 }
