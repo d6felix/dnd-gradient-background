@@ -21,7 +21,7 @@ const getSettingsForStyles = (withModules = false) => {
           modules: {
             localIdentName: !isProd
               ? "[path][name]__[local]"
-              : "[hash:base64]",
+              : "[fullhash:base64]",
           },
         },
       },
@@ -52,7 +52,7 @@ module.exports = {
     !isProd && new ReactRefreshWebpackPlugin(),
     new MiniCssExtractPlugin({
       // Для того чтобы файл со стилями не кэшировался в браузере добавим filename
-      filename: "[name]-[hash].css",
+      filename: "[name]-[fullhash].css",
     }),
     new TsCheckerPlugin(),
   ].filter(Boolean),
