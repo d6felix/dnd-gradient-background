@@ -47,6 +47,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(contentPath, "index.html"), // путь до нашего шаблона
+      favicon: path.resolve(contentPath, "favicon.ico"),
     }),
     !isProd && new ReactRefreshWebpackPlugin(),
     new MiniCssExtractPlugin({
