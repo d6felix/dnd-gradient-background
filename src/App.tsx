@@ -7,6 +7,7 @@ import { generateColorsTable } from "@utils/generateColorsTable";
 import { useGradientColor } from "@utils/useGradientColor";
 import ColorLabel from "@components/ColorLabel";
 import DropContainer from "@components/DropContainer/DropContainer";
+import SliderInput from "@components/SliderInput";
 
 const STORE_SIZE: number = 24;
 const CALC_SIZE: number = 6;
@@ -31,8 +32,9 @@ export const App = () => {
     const labels: ColorLabel[] = Array.from(Array(STORE_SIZE)).map((_, index) =>
         <ColorLabel index={index} selected={selected[index]} color={colorsTable[index]} />
     );
+    const [valueSlider, setValueSlider] = useState<number>(0);
 
-    document.getElementsByTagName("body")[0].style.background = useGradientColor(selected, colorsTable);
+    document.getElementsByTagName("body")[0].style.background = useGradientColor(selected, colorsTable, valueSlider);
     return (
         <>
             <div className={classNames("flex-wrapper")}>
@@ -43,6 +45,7 @@ export const App = () => {
                 <DropContainer type={ItemTypes.CALC} selected={selected} setSelected={setSelected} size={CALC_SIZE} labels={labels} />
             </div>
             <div className={classNames("flex-wrapper")}>
+                <SliderInput value={valueSlider} setValue={setValueSlider} />
                 <Button className={classNames("button")} onClick={() => { setColorsTable(generateColorsTable()) }}>Generate new colors</Button>
             </div>
         </>
