@@ -4,4 +4,4 @@
 
 ## Демонстрация
 
-https://d6felix.github.io/dnd-gradient-background/
+https://dnd-gradient-background.vercel.app
