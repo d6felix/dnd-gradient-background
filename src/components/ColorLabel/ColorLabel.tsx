@@ -11,6 +11,7 @@ type ColorLabelProps = {
 }
 
 export const ColorLabel: React.FC<ColorLabelProps> = ({ index, selected, color }) => {
+
     return (
         <DragElement
             index={index}
