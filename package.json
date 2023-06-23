@@ -1,8 +1,7 @@
 {
   "name": "dnd-gradient-background",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "description": "Build a gradient backgound from random colors",
-  "homepage": "https://d6felix.github.io/dnd-gradient-backgound",
   "main": "index.js",
   "license": "MIT",
   "private": false,
@@ -20,8 +19,6 @@
     "typescript": "^5.0.4"
   },
   "scripts": {
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d build",
     "lint": "eslint \"./src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint \"./src/**/*.{js,jsx,ts,tsx}\" --fix",
     "dev": "cross-env NODE_ENV=development npx webpack serve --mode=development",
@@ -57,7 +54,6 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
     "fork-ts-checker-webpack-plugin": "^8.0.0",
-    "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^5.5.1",
     "mini-css-extract-plugin": "^2.7.5",
     "postcss": "^8.4.22",
